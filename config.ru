@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'json'
 
-last_change = 1395182585
+last_change = 1394837700
 max = 0
 
 run lambda { |env|
