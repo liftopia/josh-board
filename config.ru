@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'json'
 
-last_change = 1394837700
-max = 0
+last_change = Integer(ENV['LAST_CHANGE'] || 1394837700)
+max = Integer(ENV['MAX'] || 0)
 
 run lambda { |env|
   [
@@ -19,7 +19,7 @@ run lambda { |env|
         },
         "max" => {
           "text" => 'Max',
-          "value" => (Time.now - last_change).to_i / 86400
+          "value" => [ (Time.now - last_change).to_i / 86400, max ].max
         }
       }.to_json
     )
