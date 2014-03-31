@@ -2,7 +2,7 @@
 require 'json'
 
 last_change = Integer(ENV['LAST_CHANGE'] || 1394837700)
-max = Integer(ENV['MAX'] || 0)
+max = Float(ENV['MAX'] || 0.0)
 
 run lambda { |env|
   [
@@ -12,14 +12,14 @@ run lambda { |env|
     },
     StringIO.new(
       {
-        "item" => (Time.now - last_change).to_i / 86400,
+        "item" => ((Time.now - last_change).to_f / 86400).round(2),
         "min" => {
           "text" => 'Min',
           "value" => 0
         },
         "max" => {
           "text" => 'Max',
-          "value" => [ (Time.now - last_change).to_i / 86400, max ].max
+          "value" => [ ((Time.now - last_change).to_f / 86400).round(2), max ].max
         }
       }.to_json
     )
